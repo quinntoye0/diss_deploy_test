@@ -1,0 +1,24 @@
+.sign-in-heading {
+    font-size: 3rem;
+    padding-bottom: 20px;
+}
+
+.sign-in-form {
+    height: 70vh;;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sign-in-input {
+    display: flex;
+    padding: 8px 20px;
+    border-radius: 2px;
+    margin-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-bottom: 16px;
+    border: 1px solid #fff;
+}
