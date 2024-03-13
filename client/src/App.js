@@ -12,18 +12,26 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { apiResponse: "" };
+    this.state = { apiResponse: "" };  // NOT IN USE HERE (maybe?)
   }
 
-  callAPI() {
-    fetch("http://localhost:9000/testAPI")
-      .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }));
-  }
+  /* THESE ARE NOT CURRENTLY IN USE HERE */
+  // callAPI() {
+  //   fetch("http://localhost:9000/testAPI")
+  //     .then(res => res.text())
+  //     .then(res => this.setState({ apiResponse: res }));
+  // }
 
-  componentDidMount() {
-    this.callAPI();
-  }
+  // callDB() {
+  //   fetch("http://localhost:9000/testDB")
+  //       .then(res => res.text())
+  //       .then(res => this.setState({ dbResponse: res }))
+  //       .catch(err => err);
+  // }
+
+  // componentDidMount() {
+  //   this.callAPI();
+  // }
 
   render() {
     return (
