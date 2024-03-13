@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
+var usersCollection = require('./routes/mongoUsers');
 
 var app = express();
 
@@ -22,7 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // ######## TESTING API AND MONGODB SETUP #########
 var testAPIRouter = require("./routes/testAPI");
@@ -45,5 +46,64 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.get('/sign-in', cors(), (req,res)=>{
+
+})
+
+app.post('/sign-in', async(req, res)=>{
+  const{email,password}=req.body;
+
+  try{
+    const checkEmail=await usersCollection.findOne({email:email})
+
+    if(checkEmail){
+      res.json('email exists')
+    }
+    else{
+      res.json('email does not exist')
+    }
+  }
+  catch(e){
+    res.json('error: exist')
+  }
+})
+
+
+
+
+app.post('/create-account', async(req, res)=>{
+  const{email,password,password_conf}=req.body;
+
+  if (password==password_conf) {
+    
+    const newUser={
+      email:email,
+      password:password
+    }
+  
+    try{
+      const checkEmail=await usersCollection.findOne({email:email})
+  
+      if(checkEmail){
+        res.json('email exists')
+      }
+      else{
+        res.json('email does not exist')
+
+        await usersCollection.insertMany({newUser})
+      }
+
+    }
+    catch(e){
+      res.json('error: exist')
+    }
+
+  } else {
+    res.json('passwords do not match')
+  }
+
+})
+
 
 module.exports = app;

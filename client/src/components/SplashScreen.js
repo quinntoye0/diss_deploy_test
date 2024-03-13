@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import {useLocation} from 'react-router-dom'
 import { Button } from './Button';
 import '../App.css';
 import'./SplashScreen.css'
 
 
 function SplashScreen() {
+
+  const location=useLocation()
 
   const [apiResponse, setApiResponse] = useState('');
   const [dbResponse, setDbResponse] = useState('');
@@ -29,6 +32,7 @@ function SplashScreen() {
       <p>It begins here...</p>
       <p>{apiResponse}</p>
       <p>{dbResponse}</p>
+      {/* <p>{location.state.id}</p> */}
 
       <div className='splash-btns'>
         <Button className='btns' buttonStyle='btn--outline' buttonSize='btn--large'>

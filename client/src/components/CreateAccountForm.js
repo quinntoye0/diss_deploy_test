@@ -1,9 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 import { Button } from './Button';
 import '../App.css'
 import './CreateAccountForm.css'
 
 function CreateAccountForm() {
+  
+  const history=useNavigate(); 
+
+  const [email, setEmail]=useState('')
+  const [password, setPassword]=useState('')
+  const [password_conf, setPasswordConf]=useState('')
+
+  async function submit(e){
+    e.preventDefault();
+
+    try {
+      await axios.post('/create-account', {
+        email, password, password_conf
+      })
+      .then(res=>{
+        if (res.data=='email exists') {
+          alert('Duplicate email found - account may already exist')
+          // history('/', {state:{id:email}})
+        } else if (res.data=='email does not exist') {
+          history('/', {state:{id:email}})
+        }
+      })
+      .catch(e=>{
+        alert('incorrect details');
+        console.log(e);
+      })
+
+      
+    } catch(e){
+      console.log(e);
+    }
+  }
+
   return (
     <div className='create-account'>
         
@@ -11,12 +46,16 @@ function CreateAccountForm() {
           <form>
             <h1 className='create-account-heading'>Create Account!</h1>
 
-            <input type='email' name='email' placeholder='Email' className='create-account-input' />
-            <input type='password' name='password' placeholder='Password' className='create-account-input' />
-            <input type='password' name='password-conf' placeholder='Confirm Password' className='create-account-input' />
+            <input type='email' onChange={(e)=>{setEmail(e.target.value)}} name='email' placeholder='Email' className='create-account-input' />
+            <input type='password' onChange={(e)=>{setPassword(e.target.value)}} name='password' placeholder='Password' className='create-account-input' />
+            <input type='password' onChange={(e)=>{setPasswordConf(e.target.value)}} name='password_conf' placeholder='Confirm Password' className='create-account-input' />
+
+
+            <input type='submit' onClick={submit} /> 
             
             <p>By creating an account you accept the <a href='/'>Terms and Conditions</a></p>
 
+            {/* need to sort the button to actually work. another day though */}
             <Button buttonStyle='btn--outline'>Create Account!</Button>
             
           </form>

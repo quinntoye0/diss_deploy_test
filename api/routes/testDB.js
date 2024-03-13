@@ -11,7 +11,7 @@ router.get("/", function(req, res, next) {
 
 // Connecting to MongoDB
 mongoose.connect(
-    "mongodb://mongodb:27017/sample_mflix", 
+    "mongodb://mongodb:27017/db_anonymity_web_app", 
     { useNewUrlParser: true }
 );
 
