@@ -6,7 +6,6 @@ WORKDIR /api
 COPY package.json /api/
 # install dependencies
 RUN npm install
-RUN npm install argon2
 # Copy the current directory contents into the container at /api
 COPY . /api/
 # Make port 80 available to the world outside this container

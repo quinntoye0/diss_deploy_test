@@ -1,4 +1,4 @@
-import {useLocation} from 'react-router-dom'
+// import {useLocation} from 'react-router-dom'
 import '../App.css';
 import './LoggedInSplash.css'
 import './SplashScreen.css'
@@ -6,7 +6,7 @@ import './SplashScreen.css'
 
 function LoggedInSplash() {
 
-    const location=useLocation()
+    // const location=useLocation()
 
 
     return (

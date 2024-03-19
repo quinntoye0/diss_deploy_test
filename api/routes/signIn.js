@@ -12,7 +12,7 @@ router.get('/sign-in', cors(), (req,res)=>{
   res.render('/sign-in')
 })
 
-router.post('/sign-in', async(req, res)=>{
+router.post('/sign-in', cors(), async(req, res)=>{
 
   try{
     const user =await User.findOne({email: req.body.email})
