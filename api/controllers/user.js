@@ -32,7 +32,7 @@ exports.signIn = async (req, res) => {
       console.log('before session set')
       req.session.userID = user._id;  // the user is logged as the session user
       console.log(req.session.userID);  // session userID is logged to console
-      res.redirect(`http://localhost:3000/logged-in`);  // user is redirected to homepage, now logged in
+      res.redirect(`http://localhost:3000/logged-in`);
       return
     } else {
       res.redirect(`http://localhost:3000/sign-in`);
