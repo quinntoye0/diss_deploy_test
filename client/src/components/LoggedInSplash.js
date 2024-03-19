@@ -12,6 +12,8 @@ function LoggedInSplash() {
     return (
     <div className='logged-splash-container'>
 
+        <h1>TEsting logged in page</h1>
+
         {/* <h1>hello {location.state.id} - YOU ARE LOGGED IN!</h1> */}
 
     </div>

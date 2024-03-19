@@ -9,22 +9,22 @@ router.get("/", function(req, res, next) {
     res.send(databaseConnection);
 });
 
-// Connecting to MongoDB
-mongoose.connect(
-    "mongodb://mongodb:27017/db_anonymity_web_app", 
-    { useNewUrlParser: true }
-);
+// // Connecting to MongoDB
+// mongoose.connect(
+//     "mongodb://mongodb:27017/db_anonymity_web_app", 
+//     { useNewUrlParser: true }
+// );
 
-// If there is a connection error send an error message
-mongoose.connection.on("error", error => {
-    console.log("Database connection error:", error);
-    databaseConnection = "Error connecting to Database";
-});
+// // If there is a connection error send an error message
+// mongoose.connection.on("error", error => {
+//     console.log("Database connection error:", error);
+//     databaseConnection = "Error connecting to Database";
+// });
 
-// If connected to MongoDB send a success message
-mongoose.connection.once("open", () => {
-    console.log("Connected to Database!");
-    databaseConnection = "Connected to Database";
-});
+// // If connected to MongoDB send a success message
+// mongoose.connection.once("open", () => {
+//     console.log("Connected to Database!");
+//     databaseConnection = "Connected to Database";
+// });
 
 module.exports = router;

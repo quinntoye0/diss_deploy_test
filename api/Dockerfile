@@ -3,9 +3,10 @@ FROM node:16.14.2-alpine
 # Set the working directory to /api
 WORKDIR /api
 # copy package.json into the container at /api
-COPY package*.json /api/
+COPY package.json /api/
 # install dependencies
 RUN npm install
+RUN npm install argon2
 # Copy the current directory contents into the container at /api
 COPY . /api/
 # Make port 80 available to the world outside this container

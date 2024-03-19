@@ -1,6 +1,6 @@
 import React from 'react';
-import'../../App.css';
 import LoggedInSplash from '../LoggedInSplash';
+import'../../App.css';
 
 function LoggedIn() {
     return (

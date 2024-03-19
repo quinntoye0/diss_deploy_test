@@ -15,12 +15,14 @@ function App() {
       <>
         <Router>
           <Navbar />
+
           <Routes>
             <Route path='/' exact element={ <Home />} />
             <Route path='/sign-in' element={ <SignIn />} />
             <Route path='/create-account' element={ <CreateAccount />} />
             <Route path='/logged-in' element={ <LoggedIn />} />
           </Routes>
+          
           <Footer />
         </Router>
       </>

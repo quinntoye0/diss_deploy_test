@@ -3,12 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
+var cors = require('cors');
+const mongoose = require('mongoose')
 
-
+// importing routes
 var indexRouter = require('./routes/index');
-
-var usersCollection = require('./routes/mongoUsers');
+var signInRouter = require('./routes/signIn');
+var createAccountRouter = require('./routes/createAccount');
+// ######## TESTING API AND MONGODB SETUP #########
+var testAPIRouter = require("./routes/testAPI");
+var testDBRouter = require("./routes/testDB");
 
 var app = express();
 
@@ -23,12 +27,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+const expressSession = require('express-session')
+app.use(expressSession({ secret: 'thisisthesecretkey', cookie: { expires: new Date(253402300000000) } }))
 
+mongoose.connect('mongodb://localhost:27017/db_anonymity_web_app');
+// If connected to MongoDB send a success message
+mongoose.connection.once("open", () => {
+    console.log("Connected to Database!");
+});
+mongoose.connection.on("error", (err) => {
+  console.error(err);
+  console.log(
+    "MongoDB connection error. Please make sure MongoDB is running."
+  );
+  process.exit();
+});
+
+app.use('/', indexRouter);
+app.use('/sign-in', signInRouter);
+app.use('/create-account', createAccountRouter);
 // ######## TESTING API AND MONGODB SETUP #########
-var testAPIRouter = require("./routes/testAPI");
 app.use("/testAPI", testAPIRouter);
-var testDBRouter = require("./routes/testDB");
 app.use("/testDB", testDBRouter);
 
 // catch 404 and forward to error handler
@@ -46,64 +65,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.get('/sign-in', cors(), (req,res)=>{
-
-})
-
-app.post('/sign-in', async(req, res)=>{
-  const{email,password}=req.body;
-
-  try{
-    const checkEmail=await usersCollection.findOne({email:email})
-
-    if(checkEmail){
-      res.json('email exists')
-    }
-    else{
-      res.json('email does not exist')
-    }
-  }
-  catch(e){
-    res.json('error: exist')
-  }
-})
-
-
-
-
-app.post('/create-account', async(req, res)=>{
-  const{email,password,password_conf}=req.body;
-
-  if (password==password_conf) {
-    
-    const newUser={
-      email:email,
-      password:password
-    }
-  
-    try{
-      const checkEmail=await usersCollection.findOne({email:email})
-  
-      if(checkEmail){
-        res.json('email exists')
-      }
-      else{
-        res.json('email does not exist')
-
-        await usersCollection.insertMany({newUser})
-      }
-
-    }
-    catch(e){
-      res.json('error: exist')
-    }
-
-  } else {
-    res.json('passwords do not match')
-  }
-
-})
-
 
 module.exports = app;
