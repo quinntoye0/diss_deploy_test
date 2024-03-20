@@ -4,6 +4,24 @@ import './Navbar.css';
 import { Button } from './Button';
 
 function Navbar() {
+
+    // Checks status of whether user is or isn't logged in
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            fetch('http://localhost:9000/is-logged-in', {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            .then(response => response.json())
+            .then(data => setIsLoggedIn(data.isLoggedIn)) // Parse response for login status
+            .catch(error => console.error('Error fetching login status:', error));
+        } else {
+            setIsLoggedIn(false)
+        }
+    }, []);
+
+
     const [click, setClicck] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -29,7 +47,6 @@ function Navbar() {
             <nav className='navbar'>
                 <div className='navbar-container'>
                     <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-                        {/* change the icon */}
                         Anonymity Web App <i className='fa-solid fa-worm'/> 
                     </Link> 
 
@@ -43,30 +60,54 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
-                                About us
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/sign-in' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                Sign In
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/create-account' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                Create Account
-                            </Link>
-                        </li>
+                        
+                        {/* Different Navbar llinks are rendered based on whether or not user is logged in */}
+                        {isLoggedIn ? (
+                            <>
+                                {/* Following items present when user is logged out */}
+                                <li className='nav-item'>
+                                    <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
+                                        About us
+                                    </Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to='/sign-in' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                        Sign In
+                                    </Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to='/create-account' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                        Create Account
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                {/* Following items present when user is logged in */}
+                                <li className='nav-item'>
+                                    <Link to='/groups' className='nav-links' onClick={closeMobileMenu}>
+                                        Groups
+                                    </Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to='/my-account' className='nav-links-' onClick={closeMobileMenu}>
+                                        My Account
+                                    </Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to='http://localhost:9000/sign-out' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                        Sign Out
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
 
                     {button && <Button buttonStyle='btn--outline' path='/sign-in'>Sign In</Button>}
                     {button && <Button buttonStyle='btn--primary' path='/create-account'>Create account</Button>}
 
-
                 </div>
                 
-
             </nav>
         </>
     )

@@ -5,11 +5,43 @@ import './SignInForm.css';
 
 function SignInForm() {
 
+  const handleLogin = async (event) => {
+    event.preventDefault(); // Prevent default form submission
+  
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+  
+    try {
+      const response = await fetch('http://localhost:9000/sign-in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        if (data.token) { // Successful login
+          localStorage.setItem('jwtToken', data.token); // Store token securely
+          response.redirect('/logged-in')
+        } else {
+          console.log('unsuccessful login')
+          response.redirect('/')
+        }
+      } else {
+        console.log('error: network issues')
+        response.redirect('/')
+      }
+    } catch (error) {
+      console.error(error);
+      response.redirect('/')
+    }
+  };
+
   return (
     <div className='sign-in'>
         
         <div className='sign-in-form'>
-          <form method="POST" action="http://localhost:9000/sign-in">
+          <form onSubmit={handleSignIn} method="POST" action='/'>
             <h1 className='sign-in-heading'>Sign In Here</h1>
             <input type='email' name='email' placeholder='Email' className='sign-in-input' required />
             <input type='password' name='password' placeholder='Password' className='sign-in-input' required />

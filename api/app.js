@@ -11,9 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const expressSession = require('express-session')
-app.use(expressSession({ secret: 'thisisthesecretkey', cookie: { expires: new Date(253402300000000) } }))
-
 // MONGODB CONNECTION
 const connectionString = 'mongodb+srv://quinntoye04:mongoquinntoye123@anonymitywebapp.hs3qlpt.mongodb.net/db_anonymity_web_app?retryWrites=true&w=majority&appName=AnonymityWebApp'
 mongoose.connect(connectionString)
@@ -27,6 +24,43 @@ mongoose.connection.on("error", (err) => {
   );
   process.exit();
 });
+
+// SESSION ALTERATIONS (Create/Destroy/Check)
+
+const jwt = require('jsonwebtoken');
+
+function generateAccessToken(userId) {
+  const payload = { userId };
+  // const secret = process.env.JWT_SECRET; // Stores securely in environment variable
+  const secret = 'thisisthesecretkey';
+  const options = { expiresIn: '30m' }; // Sets JWT expiration time
+  return jwt.sign(payload, secret, options);
+}
+
+function isLoggedIn(request) {
+  try {
+    const authHeader = request.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    if (token) {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      return decoded; // Return user data if valid
+    }
+  } catch (error) {
+    console.error('JWT verification error:', error);
+  }
+  return null; // Not logged in
+}
+
+app.get('/is-logged-in', (req, res) => {
+  const isUserLoggedIn = isLoggedIn(req);
+  if (isUserLoggedIn) {
+    res.json({ isLoggedIn: true }); // Send user data if logged in
+  } else {
+    res.json({ isLoggedIn: false }); // Send status if not logged in
+  }
+});
+
+
 
 
 // IMPORTING MONGODB CONTROLLERS
