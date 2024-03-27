@@ -64,31 +64,11 @@ app.post('/is-logged-in', (req, res) => {
   }
 });
 
-// app.post('/sign-out', (req, res) => {
-//   try {
-//     const authHeader = req.headers.authorization;
-//     const token = authHeader && authHeader.split(' ')[1];
-//     if (token) {
-//       res.json({
-//         status: 200,
-//         message: 'Successfully logged out' 
-//       });
-//     }
-//   } catch (error) {
-//     console.error('JWT verification error:', error);
-//   }
-//   return null; // Not logged in
-// });
-
-
-
 // IMPORTING MONGODB CONTROLLERS
 const user = require('./controllers/user')
 // GET/POST REQUESTS (Database functions)
 app.post('/create-account', user.createAccount);
 app.post('/sign-in', user.signIn)
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

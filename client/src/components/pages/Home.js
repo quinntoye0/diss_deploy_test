@@ -1,11 +1,43 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import'../../App.css';
 import SplashScreen from '../SplashScreen';
+import LoggedInSplash from '../LoggedInSplash';
 
 function Home () {
+
+    // Checks status of whether user is or isn't logged in
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            fetch('http://localhost:9000/is-logged-in', {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            .then(response => response.json())
+            .then(data => setIsLoggedIn(data.isLoggedIn)) // Parse response for login status
+            .catch(error => console.error('Error fetching login status:', error));
+        } else {
+            setIsLoggedIn(false)
+        }
+    }, []);
+
     return (
+        
         <>
-            <SplashScreen />
+            {isLoggedIn !== null ? (
+                isLoggedIn ? (
+                    <>
+                        <LoggedInSplash />
+                    </>
+                ) : (
+                    <>
+                        <SplashScreen />
+                    </>                    
+                )
+                ) : null(
+                    <p>test</p>
+                )}
         </>
     );
 }
