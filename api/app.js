@@ -3,6 +3,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 var app = express();
 
@@ -10,6 +11,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 // MONGODB CONNECTION
 const connectionString = 'mongodb+srv://quinntoye04:mongoquinntoye123@anonymitywebapp.hs3qlpt.mongodb.net/db_anonymity_web_app?retryWrites=true&w=majority&appName=AnonymityWebApp'
@@ -29,20 +41,12 @@ mongoose.connection.on("error", (err) => {
 
 const jwt = require('jsonwebtoken');
 
-function generateAccessToken(userId) {
-  const payload = { userId };
-  // const secret = process.env.JWT_SECRET; // Stores securely in environment variable
-  const secret = 'thisisthesecretkey';
-  const options = { expiresIn: '30m' }; // Sets JWT expiration time
-  return jwt.sign(payload, secret, options);
-}
-
-function isLoggedIn(request) {
+function isLoggedIn(req) {
   try {
-    const authHeader = request.headers.authorization;
+    const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (token) {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, 'thisisthesecretkey');
       return decoded; // Return user data if valid
     }
   } catch (error) {
@@ -51,7 +55,7 @@ function isLoggedIn(request) {
   return null; // Not logged in
 }
 
-app.get('/is-logged-in', (req, res) => {
+app.post('/is-logged-in', (req, res) => {
   const isUserLoggedIn = isLoggedIn(req);
   if (isUserLoggedIn) {
     res.json({ isLoggedIn: true }); // Send user data if logged in
@@ -60,6 +64,21 @@ app.get('/is-logged-in', (req, res) => {
   }
 });
 
+// app.post('/sign-out', (req, res) => {
+//   try {
+//     const authHeader = req.headers.authorization;
+//     const token = authHeader && authHeader.split(' ')[1];
+//     if (token) {
+//       res.json({
+//         status: 200,
+//         message: 'Successfully logged out' 
+//       });
+//     }
+//   } catch (error) {
+//     console.error('JWT verification error:', error);
+//   }
+//   return null; // Not logged in
+// });
 
 
 
@@ -68,6 +87,7 @@ const user = require('./controllers/user')
 // GET/POST REQUESTS (Database functions)
 app.post('/create-account', user.createAccount);
 app.post('/sign-in', user.signIn)
+
 
 
 // catch 404 and forward to error handler

@@ -7,10 +7,12 @@ function Navbar() {
 
     // Checks status of whether user is or isn't logged in
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
         if (token) {
             fetch('http://localhost:9000/is-logged-in', {
+                method: 'POST',
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then(response => response.json())
@@ -20,6 +22,12 @@ function Navbar() {
             setIsLoggedIn(false)
         }
     }, []);
+
+    const handleSignOut = async () => {
+        localStorage.removeItem('jwtToken'); // Remove JWT from local storage
+        setIsLoggedIn(false); // Update state to reflect logout
+        window.location.href = '/';
+    };
 
 
     const [click, setClicck] = useState(false);
@@ -62,52 +70,74 @@ function Navbar() {
                         </li>
                         
                         {/* Different Navbar llinks are rendered based on whether or not user is logged in */}
-                        {isLoggedIn ? (
-                            <>
-                                {/* Following items present when user is logged out */}
-                                <li className='nav-item'>
-                                    <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
-                                        About us
-                                    </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link to='/sign-in' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                        Sign In
-                                    </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link to='/create-account' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                        Create Account
-                                    </Link>
-                                </li>
-                            </>
-                        ) : (
-                            <>
-                                {/* Following items present when user is logged in */}
-                                <li className='nav-item'>
-                                    <Link to='/groups' className='nav-links' onClick={closeMobileMenu}>
-                                        Groups
-                                    </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link to='/my-account' className='nav-links-' onClick={closeMobileMenu}>
-                                        My Account
-                                    </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link to='http://localhost:9000/sign-out' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                        Sign Out
-                                    </Link>
-                                </li>
-                            </>
+                        {isLoggedIn !== null ? (
+                            isLoggedIn ? (
+                                <>
+                                    {/* Following items present when user is logged in */}
+                                    <li className='nav-item'>
+                                        <Link to='/groups' className='nav-links' onClick={closeMobileMenu}>
+                                            Groups
+                                        </Link>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <Link to='/my-account' className='nav-links-' onClick={closeMobileMenu}>
+                                            My Account
+                                        </Link>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <Link to='/' className='nav-links-mobile' onClick={handleSignOut}>
+                                            Sign Out
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    {/* Following items present when user is logged out */}
+                                    <li className='nav-item'>
+                                        <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
+                                            About us
+                                        </Link>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <Link to='/sign-in' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                            Sign In
+                                        </Link>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <Link to='/create-account' className='nav-links-mobile' onClick={closeMobileMenu}>
+                                            Create Account
+                                        </Link>
+                                    </li>
+                                    
+                                </>
+                            )
+                        ) : null(
+                            <p>test</p>
                         )}
                     </ul>
 
-                    {button && <Button buttonStyle='btn--outline' path='/sign-in'>Sign In</Button>}
-                    {button && <Button buttonStyle='btn--primary' path='/create-account'>Create account</Button>}
+                    {isLoggedIn !== null ? (
+                        isLoggedIn ? (
+                            <>
+                                <div onClick={handleSignOut}>
+                                    {button && <Button buttonStyle='btn--primary'>Sign Out</Button>}
+                                </div>
+                            </>                            
+                        ) : (
+                            <>
+                                {button && <Button buttonStyle='btn--outline' path='/sign-in'>Sign In</Button>}
+                                {button && <Button buttonStyle='btn--primary' path='/create-account'>Create account</Button>}
+                            </>
+                            
 
+                        )) : null(
+                            <>
+                                {button && <Button buttonStyle='btn--outline' path='/sign-in'>Sign In</Button>}
+                                {button && <Button buttonStyle='btn--primary' path='/create-account'>Create account</Button>}
+                            </>
+                        )}
                 </div>
-                
+
             </nav>
         </>
     )

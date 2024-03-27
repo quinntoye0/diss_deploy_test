@@ -25,7 +25,6 @@ exports.signIn = async (req, res) => {
     const passMatch = await argon2.verify(user.password, req.body.password);
 
     if (passMatch) {
-      // uses user id to generate JSON Web Token for login accessibility control
       const token = generateAccessToken(user._id); // Generate JWT using user ID
       res.status(200).json({ token });
       return
@@ -38,3 +37,11 @@ exports.signIn = async (req, res) => {
     res.json('error: login issue')
   }
 };
+
+// uses user id to generate JSON Web Token for login accessibility control
+function generateAccessToken(userId) {
+  const payload = { userId };
+  const secret = 'thisisthesecretkey';
+  const options = { expiresIn: '30m' }; // Sets JWT expiration time
+  return jwt.sign(payload, secret, options);
+}

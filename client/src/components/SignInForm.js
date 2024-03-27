@@ -5,7 +5,7 @@ import './SignInForm.css';
 
 function SignInForm() {
 
-  const handleLogin = async (event) => {
+  const handleSignIn = async (event) => {
     event.preventDefault(); // Prevent default form submission
   
     const email = event.target.email.value;
@@ -22,18 +22,18 @@ function SignInForm() {
         const data = await response.json();
         if (data.token) { // Successful login
           localStorage.setItem('jwtToken', data.token); // Store token securely
-          response.redirect('/logged-in')
+          window.location.href = '/logged-in';
         } else {
           console.log('unsuccessful login')
-          response.redirect('/')
+          window.location.href = '/';
         }
       } else {
         console.log('error: network issues')
-        response.redirect('/')
+        window.location.href = '/';
       }
     } catch (error) {
       console.error(error);
-      response.redirect('/')
+      window.location.href = '/';
     }
   };
 
