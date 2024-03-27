@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import'../../App.css';
 import SplashScreen from '../SplashScreen';
 import LoggedInSplash from '../LoggedInSplash';
+import Footer from '../Footer';
+import Cards from '../Cards';
 
 function Home () {
 
@@ -29,10 +31,12 @@ function Home () {
                 isLoggedIn ? (
                     <>
                         <LoggedInSplash />
+                        <Cards/>
                     </>
                 ) : (
                     <>
                         <SplashScreen />
+                        <Footer />
                     </>                    
                 )
                 ) : null(

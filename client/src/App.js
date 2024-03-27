@@ -1,13 +1,11 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
 
 import Home from './components/pages/Home';
 import SignIn from './components/pages/SignIn';
 import CreateAccount from './components/pages/CreateAccount';
-import LoggedIn from './components/pages/LoggedIn';
 
 function App() {
 
@@ -20,10 +18,9 @@ function App() {
             <Route path='/' exact element={ <Home />} />
             <Route path='/sign-in' element={ <SignIn />} />
             <Route path='/create-account' element={ <CreateAccount />} />
-            <Route path='/logged-in' element={ <LoggedIn />} />
           </Routes>
           
-          <Footer />
+
         </Router>
       </>
     );

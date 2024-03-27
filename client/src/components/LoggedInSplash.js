@@ -1,4 +1,5 @@
-// import {useLocation} from 'react-router-dom'
+import React from 'react'
+import { Button } from './Button';
 import '../App.css';
 import './LoggedInSplash.css'
 import './SplashScreen.css'
@@ -6,15 +7,14 @@ import './SplashScreen.css'
 
 function LoggedInSplash() {
 
-    // const location=useLocation()
 
 
     return (
     <div className='logged-splash-container'>
 
-        <h1>TEsting logged in page</h1>
+        <h1>My Groups</h1>
 
-        {/* <h1>hello {location.state.id} - YOU ARE LOGGED IN!</h1> */}
+        
 
     </div>
     )
