@@ -4,7 +4,7 @@ import './Cards.css'
 
 function Cards() {
 
-    const [groups, setGroups] = useState([]);
+    const [returnedGroups, setReturnedGroups] = useState([]);
     useEffect(() => {
 
         const fetchGroups = async () => {
@@ -12,9 +12,10 @@ function Cards() {
             const response = await fetch('http://localhost:9000/retrieve-user-groups', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ userID }` },
-            });
-            const data = await response.json();
-            setGroups(data[0]); // Set state with the first element from the response arra
+            })
+            .then( (response) => response.json());
+            // const data = await response.json();
+            setReturnedGroups(response); // Set state with the first element from the response arra
         };    
         fetchGroups();
     }, []);
@@ -26,10 +27,10 @@ function Cards() {
         <div className="cards__container">
             <div className="cards__wrapper">
                 <ul className="cards__items">
-                    {groups.map((group) => (
-                            <CardItem 
+                    {returnedGroups && returnedGroups.map((returnedGroup) => (
+                        <CardItem 
                             src='/images/home-img.jpg'
-                            text={group.name}
+                            text={returnedGroup.name}
                             label='Group Tag'
                             path='/group' 
                         />

@@ -1,5 +1,6 @@
 import React from 'react'
-import './createForm.css'
+import './CreateForm.css'
+import { Button } from './Button';
 
 function CreateGroupForm() {
 
@@ -19,14 +20,7 @@ function CreateGroupForm() {
       });
   
       if (response.ok) {
-        const data = await response.json();
-        if (data.token) {
-          window.location.href = '/';
-        } else {
-          console.log('unsuccessful group creation')
-          alert('Unsuccessful Group Creation. Please try again.')
-          window.location.href = '/create-group';
-        }
+        window.location.href = '/';
       } else {
         console.log('error: network issues')
         alert('Unsuccessful Group Creation - Network Issues. Please try again.')

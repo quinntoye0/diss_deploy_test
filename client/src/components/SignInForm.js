@@ -22,7 +22,7 @@ function SignInForm() {
         const data = await response.json();
         if (data.token) { // Successful login
           localStorage.setItem('jwtToken', data.token); // Store token securely
-          localStorage.setItem('currentUser', data.userID)
+          localStorage.setItem('currentUser', data.userID);
           window.location.href = '/';
         } else {
           console.log('unsuccessful login')

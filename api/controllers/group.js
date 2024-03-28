@@ -10,7 +10,7 @@ exports.createGroup = async (req, res) => {
             goal: req.body.group_goal, 
             desc: req.body.group_desc,
             join_code: generateJoinCode(),
-            members: [req.body.currentUser]
+            members: [req.body.current_user]
         });
         await group.save();
         res.redirect(`http://localhost:3000/`);
@@ -25,6 +25,8 @@ exports.createGroup = async (req, res) => {
 
 exports.retrieveUserGroups = async (req, res) => {
     try {
+        const authHeader = req.headers.authorization;
+        const userID = authHeader && authHeader.split(' ')[1];
         const groups = await Group.find({ members: { $in: [userID] } });
         res.json(groups);
       } catch (error) {

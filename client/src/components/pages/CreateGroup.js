@@ -1,6 +1,6 @@
 import React from 'react'
 import CreateGroupForm from '../CreateGroupForm'
-import '../App.css'
+import '../../App.css'
 
 function CreateGroup() {
   return (
