@@ -6,7 +6,10 @@ const jwt = require('jsonwebtoken');
 // function to create new user
 exports.createAccount = async (req, res) => {
     try {
-        let user = new User({email: req.body.email, password: req.body.password});
+        let user = new User({
+          email: req.body.email, 
+          password: req.body.password
+        });
         await user.save();
         res.redirect(`http://localhost:3000/sign-in`);
     } catch (e) {
@@ -22,11 +25,12 @@ exports.createAccount = async (req, res) => {
 exports.signIn = async (req, res) => {
   try{
     let user = await User.findOne({email: req.body.email})
+    const userID = user._id;
     const passMatch = await argon2.verify(user.password, req.body.password);
 
     if (passMatch) {
-      const token = generateAccessToken(user._id); // Generate JWT using user ID
-      res.status(200).json({ token });
+      const token = generateAccessToken(userID); // Generate JWT using user ID
+      res.status(200).json({ token, userID });
       return
     } else {
       console.log('incorrect login details')

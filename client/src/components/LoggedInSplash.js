@@ -7,14 +7,10 @@ import './SplashScreen.css'
 
 function LoggedInSplash() {
 
-
-
     return (
     <div className='logged-splash-container'>
 
         <h1>My Groups</h1>
-
-        
 
     </div>
     )

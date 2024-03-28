@@ -13,7 +13,7 @@
   font-size: 3rem;
 }
 
-.sign-in, .create-account {
+.sign-in, .create-splash {
   height: 70vh;
   background-position: center;
   background-size: cover;
@@ -22,10 +22,6 @@
   font-size: 100px;
 }
 
-.sign-in, .create-account {
+.sign-in, .create-splash {
   background-image: url('../public/images/sign-in-img.jpeg');
 }
-
-/* .create-account {
-  background-image: url('../public/images/sign-in-img.jpeg');
-} */

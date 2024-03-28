@@ -22,10 +22,12 @@ function SignInForm() {
         const data = await response.json();
         if (data.token) { // Successful login
           localStorage.setItem('jwtToken', data.token); // Store token securely
+          localStorage.setItem('currentUser', data.userID)
           window.location.href = '/';
         } else {
           console.log('unsuccessful login')
-          window.location.href = '/';
+          alert('Incorrect login details. Please try again.')
+          window.location.href = '/sign-in';
         }
       } else {
         console.log('error: network issues')

@@ -13,7 +13,7 @@ function Navbar() {
         if (token) {
             fetch('http://localhost:9000/is-logged-in', {
                 method: 'POST',
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { Authorization: `Bearer ${ token }` },
             })
             .then(response => response.json())
             .then(data => setIsLoggedIn(data.isLoggedIn)) // Parse response for login status
@@ -25,6 +25,7 @@ function Navbar() {
 
     const handleSignOut = async () => {
         localStorage.removeItem('jwtToken'); // Remove JWT from local storage
+        localStorage.removeItem('currentUser');
         setIsLoggedIn(false); // Update state to reflect logout
         window.location.href = '/';
     };

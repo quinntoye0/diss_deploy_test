@@ -58,7 +58,8 @@ function isLoggedIn(req) {
 app.post('/is-logged-in', (req, res) => {
   const isUserLoggedIn = isLoggedIn(req);
   if (isUserLoggedIn) {
-    res.json({ isLoggedIn: true }); // Send user data if logged in
+    const userID = isUserLoggedIn.payload;
+    res.json({ isLoggedIn: true,  userID }); // Send user data if logged in
   } else {
     res.json({ isLoggedIn: false }); // Send status if not logged in
   }
@@ -66,9 +67,12 @@ app.post('/is-logged-in', (req, res) => {
 
 // IMPORTING MONGODB CONTROLLERS
 const user = require('./controllers/user')
+const group = require('./controllers/group')
 // GET/POST REQUESTS (Database functions)
 app.post('/create-account', user.createAccount);
 app.post('/sign-in', user.signIn)
+app.post('/create-group', group.createGroup)
+app.post('/retrieve-user-groups', group.retrieveUserGroups)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

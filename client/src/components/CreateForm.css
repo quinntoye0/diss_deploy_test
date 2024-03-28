@@ -1,9 +1,9 @@
-.create-account-heading {
+.create-heading {
     font-size: 3rem;
     padding-bottom: 20px;
 }
 
-.create-account-form {
+.create-form {
     height: 70vh;
     display: flex;
     align-items: center;
@@ -11,7 +11,7 @@
 
 }
 
-.create-account-input {
+.create-input {
     display: flex;
     padding: 8px 20px;
     border-radius: 2px;
@@ -22,7 +22,7 @@
     border: 1px solid #fff;
 }
 
-.create-account-form p {
+.create-form p {
     word-wrap: normal;
     font-size: 18px;
 }

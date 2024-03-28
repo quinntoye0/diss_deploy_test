@@ -6,8 +6,8 @@ const argon2 = require('argon2');
 const userSchema = new Schema(
   {
     // sets names of each field along with their types and any requirements to be met (required field/min length etc) with a relevant message to accompany it 
-      email: { type: String, required: [true, 'email is required'], unique: true },
-      password: { type: String, required: [true, 'password is required'] }
+    email: { type: String, required: [true, 'email is required'], unique: true },
+    password: { type: String, required: [true, 'password is required'] }
   },
   { timestamps: true }
 );
