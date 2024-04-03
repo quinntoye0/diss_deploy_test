@@ -1,11 +1,24 @@
-.logged-splash-container {
+.logged-splash-outer {
     background: url('../../public/images/sign-in-img.jpeg') center center/cover no-repeat;
-    height: 10vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 20vh;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
     object-fit: contain;
+    display: flex;
+    justify-content: center;
+}
+    
+.logged-splash-container {
+    width: 1500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+}
+
+.logged-splash-header {
+    color: #fff;
+    text-align: center;
+}
+  
+.logged-splash-button {
+    margin-right: auto;
 }

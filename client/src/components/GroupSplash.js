@@ -20,8 +20,8 @@ function GroupSplash() {
                 headers: { Authorization: `Bearer ${ groupID }` },
             })
             .then( (response) => response.json());
-            // const data = await response.json();
-            setReturnedGroup(response); // Set state with the first element from the response arra
+
+            setReturnedGroup(response);
         };    
         fetchGroup();
     }, [groupID]);
@@ -41,6 +41,7 @@ function GroupSplash() {
                         
                     <div>
                         <h3><b>Description: </b>{returnedGroup.desc}</h3>
+                        <h3><b>Join Code: </b>{returnedGroup.join_code}</h3>
                     </div>
                 </>
 

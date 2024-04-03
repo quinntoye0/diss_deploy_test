@@ -54,6 +54,7 @@ function SignInForm() {
             <Button type='submit' buttonStyle='btn--outline'>Sign In!</Button>  
           </form>
         </div>
+        
     </div>
     
   )

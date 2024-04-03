@@ -14,8 +14,7 @@ function Cards() {
                 headers: { Authorization: `Bearer ${ userID }` },
             })
             .then( (response) => response.json());
-            // const data = await response.json();
-            setReturnedGroups(response); // Set state with the first element from the response arra
+            setReturnedGroups(response);
         };    
         fetchGroups();
     }, []);
@@ -23,7 +22,6 @@ function Cards() {
 
   return (
     <div className="cards">
-        <h1>Temppp title - to be pulled from db</h1>
         <div className="cards__container">
             <div className="cards__wrapper">
                 <ul className="cards__items">

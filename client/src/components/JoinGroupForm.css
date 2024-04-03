@@ -1,23 +1,22 @@
-.sign-in-heading {
-    font-size: 3rem;
-    padding-bottom: 20px;
-}
-
-.sign-in-form {
-    height: 70vh;
+.join-group-form {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto;
 
 }
 
-.sign-in-input {
+.join-label {
+    font-size: 1.5rem;
+}
+
+.join-input {
     display: flex;
+    align-items: center;
     padding: 8px 20px;
     border-radius: 2px;
     outline: none;
-    border: none;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 16px;
     border: 1px solid #fff;
 }
