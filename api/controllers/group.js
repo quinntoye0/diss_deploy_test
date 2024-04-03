@@ -2,7 +2,7 @@
 const Group = require("../models/Group");
 const crypto = require('crypto');
 
-// function to create new user
+// function to create new group
 exports.createGroup = async (req, res) => {
     try {
         let group = new Group({
@@ -23,12 +23,26 @@ exports.createGroup = async (req, res) => {
     }
 };
 
+// function to retrieve all groups an individual user has joined
 exports.retrieveUserGroups = async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
         const userID = authHeader && authHeader.split(' ')[1];
         const groups = await Group.find({ members: { $in: [userID] } });
         res.json(groups);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to retrieve groups' });
+      }
+};
+
+// function to retrieve a singular group by groupID
+exports.retrieveGroup = async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        const groupID = authHeader && authHeader.split(' ')[1];
+        let group = await Group.findOne({_id: groupID})
+        res.json(group);
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to retrieve groups' });

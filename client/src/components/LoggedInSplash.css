@@ -1,6 +1,6 @@
 .logged-splash-container {
     background: url('../../public/images/sign-in-img.jpeg') center center/cover no-repeat;
-    height: 30vh;
+    height: 10vh;
     width: 100%;
     display: flex;
     flex-direction: column;
