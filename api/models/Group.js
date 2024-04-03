@@ -17,6 +17,11 @@ const groupSchema = new Schema(
           required: [true, 'group members are required'],
         },
       ],
+      // posts: [
+      //   {
+      //     type: String
+      //   }
+      // ]
         
   },
   { timestamps: true }

@@ -7,14 +7,20 @@ function JoinGroupForm() {
     const handleJoinGroup = async (event) => {
         event.preventDefault(); // Prevent default form submission
       
-        const join_code = event.target.email.value;
+        const join_code = event.target.join_code.value;
       
         try {
-          const response = await fetch('http://localhost:9000/add-user-to-group', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ join_code }),
-          });
+            const userID = localStorage.getItem('currentUser');
+            const response = await fetch('http://localhost:9000/add-user-to-group', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ join_code, userID }),
+            })
+            //     headers: { Authorization: `Bearer ${ data }` },
+            // });
+            if (response.ok) {
+                window.location.href = '/';
+            }
         } catch (error) {
             console.error(error);
             window.location.href = '/';

@@ -15,6 +15,7 @@ function GroupSplash() {
     useEffect(() => {
 
         const fetchGroup = async () => {
+            const userID = localStorage.getItem('currentUser');
             const response = await fetch('http://localhost:9000/retrieve-group', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ groupID }` },

@@ -1,5 +1,6 @@
 // imports relevant models being accessed by this controller
 const Group = require("../models/Group");
+const User = require("../models/User");
 const crypto = require('crypto');
 
 // function to create new group
@@ -22,10 +23,14 @@ exports.createGroup = async (req, res) => {
         return res.status(400).send({message: JSON.parse(e)}) 
     }
 };
+// function to generate join code for new groups
+function generateJoinCode() {
+    return crypto.randomBytes(6).toString('hex').toUpperCase();
+}
 
 // function to retrieve all groups an individual user has joined
 exports.retrieveUserGroups = async (req, res) => {
-    try {
+    try {    
         const authHeader = req.headers.authorization;
         const userID = authHeader && authHeader.split(' ')[1];
         const groups = await Group.find({ members: { $in: [userID] } });
@@ -43,12 +48,24 @@ exports.retrieveGroup = async (req, res) => {
         const groupID = authHeader && authHeader.split(' ')[1];
         let group = await Group.findOne({_id: groupID})
         res.json(group);
-      } catch (error) {
+    } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Failed to retrieve groups' });
-      }
+        res.status(500).json({ error: 'Failed to retrieve group' });
+    }
 };
 
-function generateJoinCode() {
-    return crypto.randomBytes(6).toString('hex').toUpperCase();
+exports.addUserToGroup = async (req, res) => {
+    try {
+        const join_code = req.body.join_code;
+        const userID = req.body.userID;
+
+        await Group.findOneAndUpdate(
+            { join_code: join_code },
+            { $push: { members: userID } }
+        )
+        res.status(200);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to retrieve groups' });
+    }
 }
