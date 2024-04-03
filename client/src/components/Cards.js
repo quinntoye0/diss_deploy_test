@@ -30,25 +30,10 @@ function Cards() {
                     {returnedGroups && returnedGroups.map((returnedGroup) => (
                         <CardItem 
                             src='/images/home-img.jpg'
-                            text={returnedGroup.name}
                             label='Group Tag'
-                            path='/group' 
+                            group={returnedGroup}
                         />
                     ))}
-
-
-                    <CardItem 
-                        src='/images/home-img.jpg'
-                        text='temp text group desc tbd'
-                        label='Group Tag'
-                        path='/group' 
-                    />
-                    <CardItem 
-                        src='/images/card-img.jpg'
-                        text='different group desc tbd'
-                        label='Different Group Tag'
-                        path='/group' 
-                    />
                 </ul>
             </div>
         </div>

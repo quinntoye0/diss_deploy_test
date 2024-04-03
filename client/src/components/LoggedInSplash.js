@@ -2,6 +2,7 @@ import React from 'react'
 import '../App.css';
 import './LoggedInSplash.css'
 import './SplashScreen.css'
+import { Button } from './Button';
 
 
 function LoggedInSplash() {
@@ -10,6 +11,7 @@ function LoggedInSplash() {
     <div className='logged-splash-container'>
 
         <h1>My Groups</h1>
+        <Button buttonStyle='btn--outline' path='/create-group'>Create Group</Button>
 
     </div>
     )
