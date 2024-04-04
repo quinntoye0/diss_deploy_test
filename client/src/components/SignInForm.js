@@ -45,12 +45,10 @@ function SignInForm() {
         <div className='sign-in-form'>
           <form onSubmit={handleSignIn} method="POST" action='/'>
             <h1 className='sign-in-heading'>Sign In Here</h1>
+            
             <input type='email' name='email' placeholder='Email' className='sign-in-input' required />
             <input type='password' name='password' placeholder='Password' className='sign-in-input' required />
 
-            <input type='submit' />
-
-            {/* need to sort the button to actually work. another day though */}
             <Button type='submit' buttonStyle='btn--outline'>Sign In!</Button>  
           </form>
         </div>

@@ -35,9 +35,6 @@ function JoinGroupForm() {
                 <label className='join-label' for="join_code">Join a new group:</label>
                 <input type='text' name='join_code' placeholder='Join Code' className='join-input' required />
 
-                <input type='submit' />
-
-                {/* need to sort the button to actually work. another day though */}
                 <Button type='submit' buttonStyle='btn--outline'>Join Group!</Button>  
             </form>
         </div>

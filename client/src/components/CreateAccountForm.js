@@ -14,15 +14,10 @@ function CreateAccountForm() {
 
             <input type='email' name='email' placeholder='Email' className='create-input' required />
             <input type='password' name='password' placeholder='Password' className='create-input' required />
-            {/* <input type='password' name='password_conf' placeholder='Confirm Password' className='create-account-input' required /> */}
-            
+
             <p>By creating an account you accept the <a href='/'>Terms and Conditions</a></p>
 
-            <input type='submit' />
-
-            {/* need to sort the button to actually work. another day though */}
             <Button type='submit' buttonStyle='btn--outline'>Create Account!</Button>
-            
           </form>
         </div>
 

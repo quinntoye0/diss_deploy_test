@@ -44,9 +44,6 @@ function CreateGroupForm() {
             <input type='text' name='group_goal' placeholder='Group Goal' className='create-input' required />
             <input type='text' name='group_desc' placeholder='Group Description' className='create-input' required />
 
-            <input type='submit' />
-
-            {/* need to sort the button to actually work. another day though */}
             <Button type='submit' buttonStyle='btn--outline'>Create Group!</Button>
             
           </form>
