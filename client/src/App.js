@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import Home from './components/pages/Home';
+import About from './components/pages/About';
 import SignIn from './components/pages/SignIn';
 import CreateAccount from './components/pages/CreateAccount';
 import CreateGroup from './components/pages/CreateGroup';
@@ -18,6 +19,7 @@ function App() {
 
           <Routes>
             <Route path='/' exact element={ <Home />} />
+            <Route path='/about' exact element={ <About />} />
             <Route path='/sign-in' element={ <SignIn />} />
             <Route path='/create-account' element={ <CreateAccount />} />
             <Route path='/create-group' element={ <CreateGroup />} />

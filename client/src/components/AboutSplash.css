@@ -1,0 +1,20 @@
+.about-banner {
+    height: 10vh;
+}
+
+.about-heading {
+    font-size: 3rem;
+    padding-bottom: 20px;
+    color: #fff;
+}
+
+.about-container {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2rem;
+
+    color: bisque;
+}
