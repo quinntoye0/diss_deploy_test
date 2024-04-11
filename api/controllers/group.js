@@ -11,7 +11,8 @@ exports.createGroup = async (req, res) => {
             goal: req.body.group_goal, 
             desc: req.body.group_desc,
             join_code: generateJoinCode(),
-            members: [req.body.current_user]
+            members: [req.body.current_user],
+            messages: []
         });
         await group.save();
         res.redirect(`http://localhost:3000/`);
@@ -69,3 +70,42 @@ exports.addUserToGroup = async (req, res) => {
         res.status(500).json({ error: 'Failed to retrieve groups' });
     }
 }
+
+exports.newMessage = async (req, res) => {
+    try {
+
+        let message = {
+            content: req.body.message_content,
+            upvotes: 0,
+        };
+        const groupID = req.body.groupID;
+
+        Group.findById(groupID)
+            .then(group => {
+                group.messages.push(message);
+                group.save();
+            })  
+        res.status(200);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to retrieve groups' });
+    }
+}
+
+exports.messageVote = async (req, res) => {
+    try {
+        const groupID = req.body.groupID;
+        const messageID = req.body.messageID;
+
+        await Group.findOneAndUpdate(
+            { _id: groupID, "messages._id": messageID },
+            { $inc: { "messages.$.votes": 1 } }
+        )
+        res.status(200);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update message votes' });
+    }
+}
+
+

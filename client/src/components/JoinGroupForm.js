@@ -16,8 +16,6 @@ function JoinGroupForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ join_code, userID }),
             })
-            //     headers: { Authorization: `Bearer ${ data }` },
-            // });
             if (response.ok) {
                 window.location.href = '/';
             }

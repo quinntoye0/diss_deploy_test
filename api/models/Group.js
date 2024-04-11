@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const User = require("./User");
 
+const messageSchema = new Schema({
+  content: { type: String }, // Message content
+  upvotes: { type: Number, default: 0 }, // Upvote tally starting at 0
+});
+
 // initialises schema for creation of new user objects 
 const groupSchema = new Schema(
   {
@@ -17,12 +22,7 @@ const groupSchema = new Schema(
           required: [true, 'group members are required'],
         },
       ],
-      // posts: [
-      //   {
-      //     type: String
-      //   }
-      // ]
-        
+      messages: [messageSchema],
   },
   { timestamps: true }
 );

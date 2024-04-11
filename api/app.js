@@ -75,6 +75,8 @@ app.post('/create-group', group.createGroup)
 app.post('/retrieve-user-groups', group.retrieveUserGroups)
 app.post('/retrieve-group', group.retrieveGroup)
 app.post('/add-user-to-group', group.addUserToGroup)
+app.post('/new-message', group.newMessage)
+app.post('/group-message-vote', group.messageVote)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

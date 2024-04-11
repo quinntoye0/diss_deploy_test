@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import '../App.css';
 import './GroupSplash.css'
 import './SplashScreen.css'
-import { Button } from './Button';
 import { useParams } from 'react-router-dom';
 import Messages from './Messages';
+import NewMessageForm from './NewMessageForm';
 
 
 
@@ -16,7 +16,6 @@ function GroupSplash() {
     useEffect(() => {
 
         const fetchGroup = async () => {
-            const userID = localStorage.getItem('currentUser');
             const response = await fetch('http://localhost:9000/retrieve-group', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ groupID }` },
@@ -48,16 +47,16 @@ function GroupSplash() {
                         
                     <div className='group-splash-container'>
 
+                        <div className="new-message-container">
+                            <NewMessageForm group={returnedGroup}/>
+                        </div>
+
                         <div className="desc-container">
                             <h3 className='desc-heading'>Description:</h3>
                             <p className='desc-text'>{returnedGroup.desc}</p>
                         </div>
 
                         <Messages group={returnedGroup}/>
-
-                        {/* create a message card component that can be looped in here for each message like the cards */}
-                        
-                        {/* send group as a prop to message */}
 
                     </div>
                 </>

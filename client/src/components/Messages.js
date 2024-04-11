@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import MessageItem from './MessageItem'
 import './Messages.css'
 
 function Messages(props) {
 
-    const messages = props.returnedGroup.messages
+    const groupID = props.group._id
+    const messages = props.group.messages
 
     return (
-        <div className="messages">
-            <div className="messages_container">
-                <div className="messages_wrapper">
-                    <ul className="messages_items">
-                        {messages && messages.map((message) => (
-                            <MessageItem
-                                message={message.content}
-                                votes={message.votes}
-                            />
-                        ))}
-                    </ul>
+        <>
+            <div className="messages">
+                <div className="messages_container">
+                    <div className="messages_wrapper">
+                        <ul className="messages_items">
+                            {messages && messages.map((message) => (
+                                <MessageItem
+                                    groupID={groupID}
+                                    message={message}
+                                />
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
+
     )
 }
 
