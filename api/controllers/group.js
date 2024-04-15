@@ -76,7 +76,7 @@ exports.newMessage = async (req, res) => {
 
         let message = {
             content: req.body.message_content,
-            upvotes: 0,
+            votes: 0,
         };
         const groupID = req.body.groupID;
 

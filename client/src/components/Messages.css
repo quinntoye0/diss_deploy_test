@@ -1,0 +1,21 @@
+.new-message-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-message-heading {
+    font-size: 2rem;
+}
+
+
+.div-vote-btn {
+    padding: 12px 26px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* li {
+
+} */

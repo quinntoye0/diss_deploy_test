@@ -50,7 +50,7 @@ function MessageItem(props) {
                 <p className="message_item_text">{message.content}</p>
                 <p className="message_item_vote">{message.votes}</p>
 
-                <div onClick={handleVote}>
+                <div className="div-vote-btn" onClick={handleVote}>
                   <Button buttonStyle='btn--primary'>Vote!</Button>
                 </div>
             </div>

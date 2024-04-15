@@ -35,29 +35,35 @@ function GroupSplash() {
                 <>
                     <div className='group-splash-header'>
 
-                        <h1>{returnedGroup.name}</h1>
-                        <br />
-
                         <div className="header-items">
-                            <h3 className='goal'><b>Goal: </b>{returnedGroup.goal}</h3>
+                            <div className="group-goal">
+                                <h3 className='goal-head'><b>Goal: </b></h3>
+                                <p className="goal-content">{returnedGroup.goal}</p>
+                            </div>                            
+
+                            <h1 className='group-name'>{returnedGroup.name}</h1>
+
                             <h3 className='join-code'><b>Join Code: </b>{returnedGroup.join_code}</h3>
                         </div>
                         
                     </div>
                         
-                    <div className='group-splash-container'>
+                    <div className='group-splash-body'>
+                        <div className="group-splash-container">
 
-                        <div className="new-message-container">
-                            <NewMessageForm group={returnedGroup}/>
+                            <div className="new-message-container">
+                                <NewMessageForm group={returnedGroup} />
+                            </div>
+
+                            <Messages group={returnedGroup} />
+
+                            <div className="desc-container">
+                                <h3 className='desc-heading'>Description:</h3>
+                                <br />
+                                <p className='desc-text'>{returnedGroup.desc}</p>
+                            </div>
+
                         </div>
-
-                        <div className="desc-container">
-                            <h3 className='desc-heading'>Description:</h3>
-                            <p className='desc-text'>{returnedGroup.desc}</p>
-                        </div>
-
-                        <Messages group={returnedGroup}/>
-
                     </div>
                 </>
 

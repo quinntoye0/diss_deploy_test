@@ -4,7 +4,7 @@ const User = require("./User");
 
 const messageSchema = new Schema({
   content: { type: String }, // Message content
-  upvotes: { type: Number, default: 0 }, // Upvote tally starting at 0
+  votes: { type: Number, default: 0 }, // Upvote tally starting at 0
 });
 
 // initialises schema for creation of new user objects 
