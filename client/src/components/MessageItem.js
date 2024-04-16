@@ -46,7 +46,6 @@ function MessageItem(props) {
         <>
           <li className='message-item'>
             <div className="message-item-info">
-                <h5 className="message-item-heading">yuh</h5>
                 <p className="message-item-text">{message.content}</p>
                 <div className="div-vote">
                   <p className="message-item-vote">Votes:    {message.votes}</p>
