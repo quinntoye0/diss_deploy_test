@@ -1,5 +1,6 @@
 import React from 'react'
 import GroupSplash from '../GroupSplash'
+import Footer from '../Footer'
 
 
 function GroupHome() {
@@ -9,7 +10,8 @@ function GroupHome() {
     return (
 
         <>
-            <GroupSplash />  
+            <GroupSplash />
+            <Footer />
         </>
 
     )

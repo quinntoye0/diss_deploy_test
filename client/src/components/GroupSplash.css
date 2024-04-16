@@ -34,6 +34,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: beige;
+    color: rgb(46, 44, 44);
 }
 
 .group-splash-container {
@@ -52,6 +54,7 @@
     flex-direction: column;
     margin-right: auto;
     border: 2px solid #242424;
+    border-radius: 10px;
     padding: 10px
 }
 
@@ -62,6 +65,7 @@
     flex-direction: column;
     margin-left: auto;
     border: 2px solid #242424;
+    border-radius: 10px;
     padding: 10px;
 }
 

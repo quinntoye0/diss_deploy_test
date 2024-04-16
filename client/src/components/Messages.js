@@ -10,9 +10,9 @@ function Messages(props) {
     return (
         <>
             <div className="messages">
-                <div className="messages_container">
-                    <div className="messages_wrapper">
-                        <ul className="messages_items">
+                <div className="messages-container">
+                    <div className="messages-wrapper">
+                        <ul className="messages-items">
                             {messages && messages.map((message) => (
                                 <MessageItem
                                     groupID={groupID}

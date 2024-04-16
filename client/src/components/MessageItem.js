@@ -44,14 +44,15 @@ function MessageItem(props) {
 
       {message && (
         <>
-          <li className='message_item'>
-            <div className="message_item_info">
-                <h5 className="message_item_heading">yuh</h5>
-                <p className="message_item_text">{message.content}</p>
-                <p className="message_item_vote">{message.votes}</p>
-
-                <div className="div-vote-btn" onClick={handleVote}>
-                  <Button buttonStyle='btn--primary'>Vote!</Button>
+          <li className='message-item'>
+            <div className="message-item-info">
+                <h5 className="message-item-heading">yuh</h5>
+                <p className="message-item-text">{message.content}</p>
+                <div className="div-vote">
+                  <p className="message-item-vote">Votes:    {message.votes}</p>
+                  <div className="div-vote-btn" onClick={handleVote}>
+                    <Button buttonStyle='btn--alternate-outline'>Vote!</Button>
+                  </div>
                 </div>
             </div>
           </li>

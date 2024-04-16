@@ -29,9 +29,9 @@ function NewMessageForm(props) {
                     <h3 className='new-message-heading'>Got something to add?</h3>
 
                     <br />
-                    
+
                     <input type='text' name='message_content' placeholder='Type your message here!' className='message-input' required />
-                    <Button type='submit' buttonStyle='btn--primary'>Contribute!</Button>
+                    <Button type='submit' buttonStyle='btn--alternate-outline'>Contribute!</Button>
                     
                 </form>
             </div>
