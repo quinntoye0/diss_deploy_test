@@ -30,7 +30,7 @@ function NewMessageForm(props) {
 
                     <br />
 
-                    <input type='text' name='message_content' placeholder='Type your message here!' className='message-input' required />
+                    <input type='text' name='message-content' placeholder='Type your message here!' className='message-input' required />
                     <Button type='submit' buttonStyle='btn--alternate-outline'>Contribute!</Button>
                     
                 </form>

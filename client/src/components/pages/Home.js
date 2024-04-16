@@ -39,9 +39,9 @@ function Home () {
                         <Footer />
                     </>                    
                 )
-                ) : null(
+            ) : null(
                     <p>test</p>
-                )}
+            )}
         </>
     );
 }

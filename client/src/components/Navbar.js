@@ -70,16 +70,11 @@ function Navbar() {
                             </Link>
                         </li>
                         
-                        {/* Different Navbar llinks are rendered based on whether or not user is logged in */}
+                        {/* Different Navbar links are rendered based on whether or not user is logged in */}
                         {isLoggedIn !== null ? (
                             isLoggedIn ? (
                                 <>
                                     {/* Following items present when user is logged in */}
-                                    <li className='nav-item'>
-                                        <Link to='/groups' className='nav-links' onClick={closeMobileMenu}>
-                                            Groups
-                                        </Link>
-                                    </li>
                                     <li className='nav-item'>
                                         <Link to='/my-account' className='nav-links' onClick={closeMobileMenu}>
                                             My Account
