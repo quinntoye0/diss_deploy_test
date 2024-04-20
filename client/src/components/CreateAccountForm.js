@@ -5,11 +5,37 @@ import './CreateForm.css'
 
 function CreateAccountForm() {
 
+  const handleCreateAccount = async (event) => {
+    event.preventDefault(); // Prevent default form submission
+  
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+  
+    try {
+      const response = await fetch('https://diss-deploy-test.vercel.app/create-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (response.ok) {
+        window.location.href = '/sign-in';
+      } else {
+        console.log('error: network issues')
+        alert('Account Creation Error: Try again')
+        window.location.href = '/create-account';
+      }
+    } catch (error) {
+      console.error(error);
+      window.location.href = '/';
+    }
+  };
+
   return (
     <div className='create-splash'>
         
         <div className='create-form'>
-          <form method='POST' action='https://diss-deploy-test.vercel.app/create-account'>
+          <form onSubmit={handleCreateAccount} method='POST' action='/sign-in'>
             <h1 className='create-heading'>Create Account!</h1>
 
             <input type='email' name='email' placeholder='Email' className='create-input' required />

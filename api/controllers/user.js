@@ -11,11 +11,11 @@ exports.createAccount = async (req, res) => {
           password: req.body.password
         });
         await user.save();
-        res.redirect(`https://diss-deploy-test-client.vercel.app/sign-in`);
+        res.status(200);
     } catch (e) {
         if (e.errors){
             console.log(e.errors);
-            return res.render('create-account', {errors: e.errors});
+            return res.status(400);
         }
         return res.status(400).send({message: JSON.parse(e)}) 
     }
@@ -34,7 +34,7 @@ exports.signIn = async (req, res) => {
       return
     } else {
       console.log('incorrect login details')
-      res.redirect(`https://diss-deploy-test-client.vercel.app/sign-in`);
+      res.status(400);
     }
   }
   catch(e){

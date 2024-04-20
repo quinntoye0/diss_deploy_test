@@ -15,7 +15,7 @@ exports.createGroup = async (req, res) => {
             messages: []
         });
         await group.save();
-        res.redirect(`https://diss-deploy-test-client.vercel.app/`);
+        res.status(200);
     } catch (e) {
         if (e.errors){
             console.log(e.errors);
