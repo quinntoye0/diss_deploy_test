@@ -5,22 +5,27 @@ var logger = require('morgan');
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-const clientUrl = 'https://diss-deploy-test-client.vercel.app';
-
 const app = express()
 app.use(cors(
     {
-        origin: ["https://diss-deploy-test-client.vercel.app"],
+        origin: ["*"],
         methods: ["POST", "GET"],
         credentials: true
     }
 ));
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://diss-deploy-test-client.vercel.app');
+  res.setHeader('Access-Control-Allow-Origin', "*");
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');  
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
+});
+
+app.options((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.sendStatus(204);
 });
 
 app.use(express.json())
