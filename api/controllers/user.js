@@ -11,7 +11,7 @@ exports.createAccount = async (req, res) => {
           password: req.body.password
         });
         await user.save();
-        res.redirect(`http://localhost:3000/sign-in`);
+        res.redirect(`https://diss-deploy-test-client.vercel.app/sign-in`);
     } catch (e) {
         if (e.errors){
             console.log(e.errors);
@@ -34,7 +34,7 @@ exports.signIn = async (req, res) => {
       return
     } else {
       console.log('incorrect login details')
-      res.redirect(`http://localhost:3000/sign-in`);
+      res.redirect(`https://diss-deploy-test-client.vercel.app/sign-in`);
     }
   }
   catch(e){

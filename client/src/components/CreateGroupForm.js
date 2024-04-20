@@ -13,7 +13,7 @@ function CreateGroupForm() {
     const current_user = localStorage.getItem('currentUser');
   
     try {
-      const response = await fetch('http://localhost:9000/create-group', {
+      const response = await fetch('https://diss-deploy-test.vercel.app/create-group', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ group_name, group_goal, group_desc, current_user }),

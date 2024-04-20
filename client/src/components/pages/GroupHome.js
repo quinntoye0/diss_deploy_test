@@ -13,7 +13,7 @@ function GroupHome() {
         if (token) {
             const checkLoggedStatus = async () => {
                 try {
-                    const response = await fetch('http://localhost:9000/is-logged-in', {
+                    const response = await fetch('https://diss-deploy-test.vercel.app/is-logged-in', {
                         method: 'POST',
                         headers: { Authorization: `Bearer ${ token }` },
                     })

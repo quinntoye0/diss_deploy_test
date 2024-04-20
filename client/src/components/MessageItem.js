@@ -17,7 +17,7 @@ function MessageItem(props) {
 
   // function to upvote current messsage
   const updateMessageInDatabase = async(groupID, messageID) => {
-    fetch('http://localhost:9000/group-message-vote', {
+    fetch('https://diss-deploy-test.vercel.app/group-message-vote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ groupID, messageID }),

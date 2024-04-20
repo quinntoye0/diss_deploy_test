@@ -12,7 +12,7 @@ function Home () {
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
         if (token) {
-            fetch('http://localhost:9000/is-logged-in', {
+            fetch('https://diss-deploy-test.vercel.app/is-logged-in', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${token}` },
             })

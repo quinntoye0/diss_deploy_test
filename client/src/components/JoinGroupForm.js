@@ -11,7 +11,7 @@ function JoinGroupForm() {
       
         try {
             const userID = localStorage.getItem('currentUser');
-            const response = await fetch('http://localhost:9000/add-user-to-group', {
+            const response = await fetch('https://diss-deploy-test.vercel.app/add-user-to-group', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ join_code, userID }),

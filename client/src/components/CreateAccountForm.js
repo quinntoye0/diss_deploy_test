@@ -9,7 +9,7 @@ function CreateAccountForm() {
     <div className='create-splash'>
         
         <div className='create-form'>
-          <form method='POST' action='http://localhost:9000/create-account'>
+          <form method='POST' action='https://diss-deploy-test.vercel.app/create-account'>
             <h1 className='create-heading'>Create Account!</h1>
 
             <input type='email' name='email' placeholder='Email' className='create-input' required />

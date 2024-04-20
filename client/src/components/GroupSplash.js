@@ -16,7 +16,7 @@ function GroupSplash() {
     useEffect(() => {
 
         const fetchGroup = async () => {
-            const response = await fetch('http://localhost:9000/retrieve-group', {
+            const response = await fetch('https://diss-deploy-test.vercel.app/retrieve-group', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ groupID }` },
             })

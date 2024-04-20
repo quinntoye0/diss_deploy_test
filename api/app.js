@@ -8,7 +8,7 @@ const cors = require('cors')
 const app = express()
 app.use(cors(
     {
-        origin: ["https://deploy-frontend"],
+        origin: ["https://diss-deploy-test-client.vercel.app"],
         methods: ["POST", "GET"],
         credentials: true
     }

@@ -9,7 +9,7 @@ function Cards() {
 
         const fetchGroups = async () => {
             const userID = localStorage.getItem('currentUser');
-            const response = await fetch('http://localhost:9000/retrieve-user-groups', {
+            const response = await fetch('https://diss-deploy-test.vercel.app/retrieve-user-groups', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ userID }` },
             })

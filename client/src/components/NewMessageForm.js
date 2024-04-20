@@ -10,7 +10,7 @@ function NewMessageForm(props) {
         const message_content = event.target.message_content.value;
       
         try {
-            await fetch('http://localhost:9000/new-message', {
+            await fetch('https://diss-deploy-test.vercel.app/new-message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ groupID, message_content }),
