@@ -13,7 +13,7 @@ function Navbar() {
         const checkLoggedStatus = async () => {
             const token = localStorage.getItem('jwtToken');
             if (token) {
-                await axios.post('https://diss-deploy-test.vercel.app/is-logged-in', {
+                const response = await axios.post('https://diss-deploy-test.vercel.app/is-logged-in', {
                     method: 'POST',
                     headers: { Authorization: `Bearer ${ token }` },
                 })
