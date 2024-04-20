@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import GroupSplash from '../GroupSplash'
 import Footer from '../Footer'
+import axios from 'axios';
 
 
 function GroupHome() {
@@ -13,11 +14,11 @@ function GroupHome() {
         if (token) {
             const checkLoggedStatus = async () => {
                 try {
-                    const response = await fetch('https://diss-deploy-test.vercel.app/is-logged-in', {
+                    const response = await axios.post('https://diss-deploy-test.vercel.app/is-logged-in', {
                         method: 'POST',
                         headers: { Authorization: `Bearer ${ token }` },
                     })
-                    const data = await response.json();
+                    const data = await response.data;
                     setIsLoggedIn(data.isLoggedIn);
                 } catch (error) {
                     console.error('Error fetching login status:', error);

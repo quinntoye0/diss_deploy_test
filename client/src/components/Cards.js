@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CardItem from './CardItem'
 import './Cards.css'
+import axios from 'axios';
 
 function Cards() {
 
@@ -9,12 +10,11 @@ function Cards() {
 
         const fetchGroups = async () => {
             const userID = localStorage.getItem('currentUser');
-            const response = await fetch('https://diss-deploy-test.vercel.app/retrieve-user-groups', {
+            const response = await axios.post('https://diss-deploy-test.vercel.app/retrieve-user-groups', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ userID }` },
             })
-            .then( (response) => response.json());
-            setReturnedGroups(response);
+            setReturnedGroups(response.data);
         };    
         fetchGroups();
     }, []);

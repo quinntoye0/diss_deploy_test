@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from './Button';
 import '../App.css'
 import './CreateForm.css'
+import axios from 'axios';
 
 function CreateAccountForm() {
 
@@ -12,7 +13,7 @@ function CreateAccountForm() {
     const password = event.target.password.value;
   
     try {
-      const response = await fetch('https://diss-deploy-test.vercel.app/create-account', {
+      const response = await axios.post('https://diss-deploy-test.vercel.app/create-account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

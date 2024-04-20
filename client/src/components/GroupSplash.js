@@ -5,8 +5,7 @@ import './SplashScreen.css'
 import { useParams } from 'react-router-dom';
 import Messages from './Messages';
 import NewMessageForm from './NewMessageForm';
-
-
+import axios from 'axios';
 
 function GroupSplash() {
 
@@ -16,13 +15,12 @@ function GroupSplash() {
     useEffect(() => {
 
         const fetchGroup = async () => {
-            const response = await fetch('https://diss-deploy-test.vercel.app/retrieve-group', {
+            const response = await axios.post('https://diss-deploy-test.vercel.app/retrieve-group', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${ groupID }` },
             })
-            .then( (response) => response.json());
 
-            setReturnedGroup(response);
+            setReturnedGroup(response.data);
         };    
         fetchGroup();
     }, [groupID]);

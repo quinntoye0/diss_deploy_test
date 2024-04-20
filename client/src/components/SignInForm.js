@@ -2,8 +2,11 @@ import React from 'react';
 import { Button } from './Button';
 import '../App.css';
 import './SignInForm.css';
+import axios from 'axios';
 
 function SignInForm() {
+
+  axios.defaults.withCredentials = true;
 
   const handleSignIn = async (event) => {
     event.preventDefault(); // Prevent default form submission
@@ -12,10 +15,13 @@ function SignInForm() {
     const password = event.target.password.value;
   
     try {
-      const response = await fetch('https://diss-deploy-test.vercel.app/sign-in', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+      const response = await axios.post('https://diss-deploy-test.vercel.app/sign-in', {
+        email,
+        password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
   
       if (response.ok) {

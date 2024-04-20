@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from './Button'
 import './JoinGroupForm.css'
+import axios from 'axios';
 
 function JoinGroupForm() {
 
@@ -11,7 +12,7 @@ function JoinGroupForm() {
       
         try {
             const userID = localStorage.getItem('currentUser');
-            const response = await fetch('https://diss-deploy-test.vercel.app/add-user-to-group', {
+            const response = await axios.post('https://diss-deploy-test.vercel.app/add-user-to-group', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ join_code, userID }),

@@ -2,13 +2,13 @@ import React from 'react'
 import { Button } from './Button';
 import '../App.css';
 import'./SplashScreen.css'
+import axios from 'axios';
 
 
 function SplashScreen() {
 
   return (
     <div className='splash-container'>
-      {/* <video src='../../public/videos/video-1.mp4' autoPlay loop muted /> */}
       <h1>Reinvent Your Team!</h1>
       <p>It begins here...</p>
 

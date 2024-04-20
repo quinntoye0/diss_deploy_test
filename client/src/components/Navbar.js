@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
+import axios from 'axios';
 
 function Navbar() {
 
@@ -9,18 +10,19 @@ function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('jwtToken');
-        if (token) {
-            fetch('https://diss-deploy-test.vercel.app/is-logged-in', {
-                method: 'POST',
-                headers: { Authorization: `Bearer ${ token }` },
-            })
-            .then(response => response.json())
-            .then(data => setIsLoggedIn(data.isLoggedIn)) // Parse response for login status
-            .catch(error => console.error('Error fetching login status:', error));
-        } else {
-            setIsLoggedIn(false)
+        const checkLoggedStatus = async () => {
+            const token = localStorage.getItem('jwtToken');
+            if (token) {
+                await axios.post('https://diss-deploy-test.vercel.app/is-logged-in', {
+                    method: 'POST',
+                    headers: { Authorization: `Bearer ${ token }` },
+                })
+                setIsLoggedIn(response.data.isLoggedIn);
+            } else {
+                setIsLoggedIn(false)
+            }
         }
+        checkLoggedStatus();
     }, []);
 
     const handleSignOut = async () => {

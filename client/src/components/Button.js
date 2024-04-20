@@ -24,14 +24,5 @@ export const Button = ({children, type, onClick, buttonStyle, buttonSize, path})
                 </button>
             )}
         </>
-
-
-
-
-        // <Link to={path} className='btn-mobile'>
-        //     <button className={`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type={type}>
-        //         {children}
-        //     </button>
-        // </Link>
     )
 };

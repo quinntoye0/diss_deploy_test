@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from './Button'
+import axios from 'axios';
 
 function NewMessageForm(props) {
 
@@ -10,7 +11,7 @@ function NewMessageForm(props) {
         const message_content = event.target.message_content.value;
       
         try {
-            await fetch('https://diss-deploy-test.vercel.app/new-message', {
+            await axios.post('https://diss-deploy-test.vercel.app/new-message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ groupID, message_content }),
