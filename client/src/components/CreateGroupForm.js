@@ -5,6 +5,8 @@ import axios from 'axios';
 
 function CreateGroupForm() {
 
+  axios.defaults.withCredentials = true;
+
   const handleCreateGroup = async (event) => {
     event.preventDefault(); // Prevent default form submission
   

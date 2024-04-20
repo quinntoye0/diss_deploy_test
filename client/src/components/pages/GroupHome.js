@@ -6,6 +6,8 @@ import axios from 'axios';
 
 function GroupHome() {
 
+    axios.defaults.withCredentials = true;
+
     // Checks status of whether user is or isn't logged in
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 

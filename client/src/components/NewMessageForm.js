@@ -4,6 +4,8 @@ import axios from 'axios';
 
 function NewMessageForm(props) {
 
+    axios.defaults.withCredentials = true;
+
     const handleNewMessage = async (event) => {
         event.preventDefault(); // Prevent default form submission
 

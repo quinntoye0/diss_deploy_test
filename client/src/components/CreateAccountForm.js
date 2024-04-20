@@ -6,6 +6,8 @@ import axios from 'axios';
 
 function CreateAccountForm() {
 
+  axios.defaults.withCredentials = true;
+
   const handleCreateAccount = async (event) => {
     event.preventDefault(); // Prevent default form submission
   

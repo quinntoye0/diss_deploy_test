@@ -4,6 +4,8 @@ import axios from 'axios';
 
 function MessageItem(props) {
 
+  axios.defaults.withCredentials = true;
+
   console.log(props)
   console.log(props.message)
 
