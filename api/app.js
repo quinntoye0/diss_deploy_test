@@ -5,23 +5,19 @@ var logger = require('morgan');
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-var app = express();
-
+const app = express()
+app.use(cors(
+    {
+        origin: ["https://deploy-frontend"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+));
+app.use(express.json())
 app.use(logger('dev'));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
-
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
 
 // MONGODB CONNECTION
 const connectionString = 'mongodb+srv://quinntoye04:mongoquinntoye123@anonymitywebapp.hs3qlpt.mongodb.net/db_anonymity_web_app?retryWrites=true&w=majority&appName=AnonymityWebApp'
@@ -94,4 +90,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(3001, () => {
+  console.log("API Running")
+})
