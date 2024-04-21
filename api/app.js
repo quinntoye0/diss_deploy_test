@@ -8,15 +8,17 @@ const cors = require('cors')
 const app = express()
 
 // app.use(cors());
-app.options("*", cors());
+// app.options("*", cors());
 
 const corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: '*',
+  // credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'OPTIONS', 'DELETE'],
+  optionsSuccessStatus: 200,  
 };
 
-const corsMiddleware = cors(corsOptions);
-app.use(corsMiddleware);
+app.use(cors(corsOptions));
 
 // export const AuthRouter = () => {
 //   const router = express.Router();
