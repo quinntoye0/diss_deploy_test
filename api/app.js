@@ -7,8 +7,27 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(cors());
+// app.use(cors());
 app.options("*", cors());
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+const corsMiddleware = cors(corsOptions);
+app.use(corsMiddleware);
+
+// export const AuthRouter = () => {
+//   const router = express.Router();
+//   // Auth
+//   router.use('/', express.json());
+//   router.use('/', express.urlencoded({ extended: true }));
+
+//   router.use('/signin', cors(corsOptions));
+//   router.post('/signin', AuthController.signIn);
+//   return router;
+// };
 
 
 // app.use(allowCors(handler));
