@@ -6,38 +6,11 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 const app = express()
-app.use(cors(
-    {
-        origin: '*',
-        methods: ["POST", "GET"]
-    }
-));
 
-const allowCors = fn => async (req, res) => {
-  app.use(cors(
-    {
-        origin: '*',
-        methods: ["POST", "GET"]
-    }
-  ));
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  )
-  if (req.method === 'OPTIONS') {
-    res.status(200).end()
-    return
-  }
-  return await fn(req, res)
-}
+app.use(cors());
+app.options("*", cors());
 
-const handler = (req, res) => {
-  const d = new Date()
-  res.end(d.toString())
-}
 
-module.exports = allowCors(handler)
 // app.use(allowCors(handler));
 
 // app.use(function (req, res, next) {
@@ -50,7 +23,7 @@ module.exports = allowCors(handler)
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');  
 //   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   // res.setHeader('Access-Control-Allow-Credentials', true);
+// res.setHeader('Access-Control-Allow-Credentials', true);
 //   next();
 // });
 
