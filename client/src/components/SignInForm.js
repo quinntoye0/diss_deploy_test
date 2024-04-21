@@ -6,8 +6,6 @@ import axios from 'axios';
 
 function SignInForm() {
 
-  axios.defaults.withCredentials = true;
-
   const handleSignIn = async (event) => {
     event.preventDefault(); // Prevent default form submission
   

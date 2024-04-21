@@ -8,9 +8,8 @@ const cors = require('cors')
 const app = express()
 app.use(cors(
     {
-        origin: 'https://diss-deploy-test-client.vercel.app/',
-        methods: ["POST", "GET"],
-        credentials: true
+        origin: '*',
+        methods: ["POST", "GET"]
     }
 ));
 
@@ -21,10 +20,10 @@ app.use(cors(
 // });
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://diss-deploy-test-client.vercel.app/');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');  
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  // res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 

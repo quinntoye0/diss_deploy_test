@@ -6,8 +6,6 @@ import axios from 'axios';
 
 function Navbar() {
 
-    axios.defaults.withCredentials = true;
-
     // Checks status of whether user is or isn't logged in
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 

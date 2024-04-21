@@ -5,8 +5,6 @@ import axios from 'axios';
 
 function Cards() {
 
-    axios.defaults.withCredentials = true;
-
     const [returnedGroups, setReturnedGroups] = useState([]);
     useEffect(() => {
 

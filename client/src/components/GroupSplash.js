@@ -9,8 +9,6 @@ import axios from 'axios';
 
 function GroupSplash() {
 
-    axios.defaults.withCredentials = true;
-
     const { groupID } = useParams();
 
     const [returnedGroup, setReturnedGroup] = useState();

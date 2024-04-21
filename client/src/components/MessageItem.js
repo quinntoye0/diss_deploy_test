@@ -4,19 +4,12 @@ import axios from 'axios';
 
 function MessageItem(props) {
 
-  axios.defaults.withCredentials = true;
-
-  console.log(props)
-  console.log(props.message)
-
   // unpacks props containing db IDs to locate group & messages
   const groupID = props.groupID
   const messageID = props.message._id
 
   // sets state of current message
   const [message, setMessage] = useState(props.message);
-
-  console.log(message)
 
   // function to upvote current messsage
   const updateMessageInDatabase = async(groupID, messageID) => {
