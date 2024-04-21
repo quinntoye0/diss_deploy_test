@@ -8,25 +8,26 @@ const cors = require('cors')
 const app = express()
 app.use(cors(
     {
-        origin: ["*"],
+        origin: 'https://diss-deploy-test-client.vercel.app/',
         methods: ["POST", "GET"],
-        // credentials: true
+        credentials: true
     }
 ));
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', "*");
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');  
+  res.setHeader('Access-Control-Allow-Origin', 'https://diss-deploy-test-client.vercel.app/');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');  
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 
-app.options((req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.sendStatus(204);
-});
+// app.options((req, res) => {
+//   res.setHeader('Access-Control-Allow-Origin', "*");
+//   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// });
 
 app.use(express.json())
 app.use(logger('dev'));
