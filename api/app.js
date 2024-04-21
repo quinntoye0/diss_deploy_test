@@ -11,7 +11,7 @@ const app = express()
 // app.options("*", cors());
 
 const corsOptions = {
-  origin: '*',
+  origin: 'https://diss-deploy-test-client.vercel.app',
   // credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
   methods: ['GET', 'POST', 'PUT', 'OPTIONS', 'DELETE'],
