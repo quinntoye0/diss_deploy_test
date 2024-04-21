@@ -14,6 +14,12 @@ app.use(cors(
 ));
 
 const allowCors = fn => async (req, res) => {
+  app.use(cors(
+    {
+        origin: '*',
+        methods: ["POST", "GET"]
+    }
+  ));
   res.setHeader('Access-Control-Allow-Credentials', true)
   res.setHeader('Access-Control-Allow-Origin', '*')
   // another common pattern
@@ -35,7 +41,7 @@ const handler = (req, res) => {
   res.end(d.toString())
 }
 
-module.exports = allowCors(handler)
+app.use(allowCors(handler));
 
 // app.use(function (req, res, next) {
 //   res.header('Access-Control-Allow-Origin', 'https://diss-deploy-test-client.vercel.app/');
