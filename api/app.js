@@ -33,6 +33,8 @@ const allowCors = fn => async (req, res) => {
   return await fn(req, res)
 }
 
+app.use(allowCors())
+
 // const corsOptions = {
 //   origin: 'https://diss-deploy-test-client.vercel.app',
 //   credentials: true,
