@@ -10,15 +10,30 @@ const app = express()
 // app.use(cors());
 // app.options("*", cors());
 
-const corsOptions = {
-  origin: 'https://diss-deploy-test-client.vercel.app',
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  methods: ['GET', 'POST', 'PUT', 'OPTIONS', 'DELETE'],
-  optionsSuccessStatus: 200,  
-};
+const allowCors = fn => async (req, res) => {
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  )
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+  return await fn(req, res)
+}
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: 'https://diss-deploy-test-client.vercel.app',
+//   credentials: true,
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   methods: ['GET', 'POST', 'PUT', 'OPTIONS', 'DELETE'],
+//   optionsSuccessStatus: 200,  
+// };
+
+// app.use(cors(corsOptions));
 
 // export const AuthRouter = () => {
 //   const router = express.Router();
@@ -93,7 +108,7 @@ function isLoggedIn(req) {
   return null; // Not logged in
 }
 
-app.post('/is-logged-in', (req, res) => {
+app.post('/is-logged-in', allowCors((req, res) => {
   const isUserLoggedIn = isLoggedIn(req);
   if (isUserLoggedIn) {
     const userID = isUserLoggedIn.payload;
@@ -101,20 +116,20 @@ app.post('/is-logged-in', (req, res) => {
   } else {
     res.json({ isLoggedIn: false }); // Send status if not logged in
   }
-});
+}));
 
 // IMPORTING MONGODB CONTROLLERS
 const user = require('./controllers/user')
 const group = require('./controllers/group')
 // GET/POST REQUESTS (Database functions)
-app.post('/create-account', user.createAccount);
-app.post('/sign-in', user.signIn)
-app.post('/create-group', group.createGroup)
-app.post('/retrieve-user-groups', group.retrieveUserGroups)
-app.post('/retrieve-group', group.retrieveGroup)
-app.post('/add-user-to-group', group.addUserToGroup)
-app.post('/new-message', group.newMessage)
-app.post('/group-message-vote', group.messageVote)
+app.post('/create-account', allowCors(user.createAccount));
+app.post('/sign-in', allowCors(user.signIn))
+app.post('/create-group', allowCors(group.createGroup))
+app.post('/retrieve-user-groups', allowCors(group.retrieveUserGroups))
+app.post('/retrieve-group', allowCors(group.retrieveGroup))
+app.post('/add-user-to-group', allowCors(group.addUserToGroup))
+app.post('/new-message', allowCors(group.newMessage))
+app.post('/group-message-vote', allowCors(group.messageVote))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -132,6 +147,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3001, () => {
-  console.log("API Running")
-})
+// app.listen(3001, () => {
+//   console.log("API Running")
+// })
+
+module.exports = allowCors(app);
